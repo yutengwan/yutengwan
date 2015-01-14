@@ -1,2 +1,0 @@
-# yutengwan.github.io
-YutengwanBlog
