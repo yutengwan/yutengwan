@@ -91,4 +91,9 @@ PS的用法：ps  -  parameter
 
 SIGKILL和SIGSTOP信号不能被，封锁或者忽略，但是，其他信号可以
 
+```shell
+function() {
+
+}
+```
 
