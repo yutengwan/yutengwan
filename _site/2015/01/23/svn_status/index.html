@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>my first post</title>
+    <title>svn status的各种状态的说明</title>
     
     <meta name="author" content="yutengwan">
 
@@ -131,22 +131,40 @@
       <div class="container">
         
 <div class="page-header">
-  <h1>my first post </h1>
+  <h1>svn status的各种状态的说明 </h1>
 </div>
 
 <div class="row post-full">
   <div class="col-xs-12">
     <div class="date">
-      <span>13 January 2015</span>
+      <span>23 January 2015</span>
     </div>
     <div class="content">
-      <h1>my first post</h1>
+      <h3>svn status:</h3>
 
+<p><strong>U:</strong> working file was uploaded,工作目录更新</p>
 
-<p>This is my first post.Click the link below to go back to index:</p>
+<p><strong>G:</strong> Changes on the repo were automatically merged into the working copy，版本自动merge上去</p>
 
+<p><strong>M:</strong> Working copy is modify,文件修改</p>
 
-<p><a href="/index.html">Go back</a></p>
+<p><strong>C:</strong> The file conflicts with the version in the repo文件在版本库中冲突</p>
+
+<p><strong>?:</strong> The file is not under version control 文件不在版本库中</p>
+
+<p><strong>!:</strong> The file is under version control but is missing or incomplete 文件在版本库中，但是没有使用svn删除或不完整</p>
+
+<p><strong>A:</strong> The file will be added to version control(after commit)新增文件</p>
+
+<p><strong>A+:</strong> The file will be moved (after commit)</p>
+
+<p><strong>D:</strong>  The file will be deleted (after commit)文件被移除版本库</p>
+
+<p><strong>S:</strong>  This signifies that the file or directory has been switched from the path of the rest of the working copy (using svn switch) to a branch</p>
+
+<p><strong>I:</strong> Ignored</p>
+
+<p><strong>R:</strong> Item has been replaced in your working copy. This means the file was scheduled for deletion, and then a new file with the same name was scheduled for addition in its place.</p>
 
     </div>
 
@@ -157,11 +175,11 @@
     <hr>
     <ul class="pagination">
     
-      <li class="prev disabled"><a>&larr; Previous</a></li>
+      <li class="prev"><a href="/2015/01/23/process_st" title="进程的状态">&laquo; Previous</a></li>
     
       <li><a href="/archive.html">Archive</a></li>
     
-      <li class="next"><a href="/2015/01/23/extern_cplusplus" title="C++ extern">Next &raquo;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
     
     </ul>
     <hr>

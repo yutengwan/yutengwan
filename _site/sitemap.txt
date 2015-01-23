@@ -8,6 +8,7 @@ http://yutengwan.github.io/rss.xml
 http://yutengwan.github.io/sitemap.txt
 http://yutengwan.github.io/tags.html
 
+http://yutengwan.github.io/2015/01/23/svn_status
+http://yutengwan.github.io/2015/01/23/process_st
 http://yutengwan.github.io/2015/01/23/extern_cplusplus
-http://yutengwan.github.io/2015/01/22/process_status
 http://yutengwan.github.io/2015/01/13/first_post

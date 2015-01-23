@@ -4,13 +4,144 @@
  <title>Brady 丶 一点一滴</title>
  <link href="http://yutengwan.github.io/" rel="self"/>
  <link href="http://yutengwan.github.io"/>
- <updated>2015-01-23T17:19:22+08:00</updated>
+ <updated>2015-01-23T17:27:21+08:00</updated>
  <id>http://yutengwan.github.io</id>
  <author>
    <name>yutengwan</name>
    <email>yutengwan@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>svn status的各种状态的说明</title>
+   <link href="http://yutengwan.github.io/2015/01/23/svn_status"/>
+   <updated>2015-01-23T00:00:00+08:00</updated>
+   <id>http://yutengwan.github.io/2015/01/23/svn_status</id>
+   <content type="html">&lt;h3&gt;svn status:&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;U:&lt;/strong&gt; working file was uploaded,工作目录更新&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;G:&lt;/strong&gt; Changes on the repo were automatically merged into the working copy，版本自动merge上去&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;M:&lt;/strong&gt; Working copy is modify,文件修改&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;C:&lt;/strong&gt; The file conflicts with the version in the repo文件在版本库中冲突&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;?:&lt;/strong&gt; The file is not under version control 文件不在版本库中&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;!:&lt;/strong&gt; The file is under version control but is missing or incomplete 文件在版本库中，但是没有使用svn删除或不完整&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; The file will be added to version control(after commit)新增文件&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A+:&lt;/strong&gt; The file will be moved (after commit)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;D:&lt;/strong&gt;  The file will be deleted (after commit)文件被移除版本库&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;S:&lt;/strong&gt;  This signifies that the file or directory has been switched from the path of the rest of the working copy (using svn switch) to a branch&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;I:&lt;/strong&gt; Ignored&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;R:&lt;/strong&gt; Item has been replaced in your working copy. This means the file was scheduled for deletion, and then a new file with the same name was scheduled for addition in its place.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>进程的状态</title>
+   <link href="http://yutengwan.github.io/2015/01/23/process_st"/>
+   <updated>2015-01-23T00:00:00+08:00</updated>
+   <id>http://yutengwan.github.io/2015/01/23/process_st</id>
+   <content type="html">&lt;h2&gt;Linux 下的进程状态：&lt;/h2&gt;
+
+&lt;p&gt;首先查看进程状态的命令PS&lt;/p&gt;
+
+&lt;p&gt;PS的用法：ps  -  parameter&lt;/p&gt;
+
+&lt;p&gt;常用参数：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-A&lt;/code&gt; 显示所有的进程(等价于&lt;code&gt;-e&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-a&lt;/code&gt; 显示一个终端的所有进程&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;c&lt;/code&gt;   显示进程的真实名称&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-e&lt;/code&gt;  等价于&lt;code&gt;-A&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-N&lt;/code&gt;  忽略选择&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-d&lt;/code&gt;  显示所有进程，但是省略所有的会话引线&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-x&lt;/code&gt;  显示没有控制终端的进程，同时显示各个命令的具体路径。&lt;code&gt;dx&lt;/code&gt;  不可合用&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-p&lt;/code&gt; pid进程使用cpu时间&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-u&lt;/code&gt; uid or username选择有效的用户id或者用户名&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-g&lt;/code&gt; gid or groupname 显示组的所有进程&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;U&lt;/code&gt;  username显示该用户下的所有进程，且显示各个命令的线下路径ps U zhangsan&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-f&lt;/code&gt; 全部列出，通常和显示选项联用。ps -fa or ps -fx&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-m&lt;/code&gt; 显示所有的线程&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-H&lt;/code&gt; 显示进程的层次 ps -Ha&lt;/p&gt;
+
+&lt;hr&gt;
+
+
+&lt;h4&gt;ps -aux输出格式&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND USER&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;USER&lt;/code&gt; 进程拥有者&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;PID&lt;/code&gt; 进程pid&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;%CPU&lt;/code&gt; 占用cpu的使用率&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;%MEM&lt;/code&gt; 占用内存大小&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;VSZ&lt;/code&gt; 占用虚拟内存大小&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;RSS&lt;/code&gt;  占用物理内存&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;TTY&lt;/code&gt; linux的终端号pts/1&lt;/p&gt;
+
+&lt;hr&gt;
+
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;STAT&lt;/code&gt;  运行的状态：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;D：不可中断终端的休眠状态(IO进程)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;R：正在运行，在可中断队列中&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;S：处于休眠状态，静止状态&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;T：停止或被跟踪，暂停执行&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;W：进入内存交换&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;X：杀死的进程&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Z：僵死进程不存在但暂时无法消除&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;S：进程的领导者(在它之下有子进程)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;l：多进程的(CLONE_THREAD,类似NPTL pthreads)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;+：位于后台的进程组&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;hr&gt;
+
+
+&lt;h4&gt;Kill终止进程有十几种控制进程的方法&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;kill -STOP [pid]&lt;/code&gt;发送SIGSTOP(17,19,23)停止一个进程，而不消灭这个进程&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;kill -CONT [pid]&lt;/code&gt; 发送SIGCONT(19,18,25)重新开始一个停止进程&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;kill -KILL [pid]&lt;/code&gt; 发送SIGKILL(9)强迫进程立即停止，不实施清理操作&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;kill -9 -1&lt;/code&gt; 终止你拥有的全部进程&lt;/p&gt;
+
+&lt;p&gt;SIGKILL和SIGSTOP信号不能被，封锁或者忽略，但是，其他信号可以&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>C++ extern</title>
@@ -164,39 +295,6 @@ int main(int argv,char * argv[])
 &lt;p&gt;cFile编译会出错。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/xulei/archive/2006/11/12/558139.html&quot;&gt;转载：extern &amp;ldquo;C&amp;rdquo;&lt;/a&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>svn status的各种状态的说明</title>
-   <link href="http://yutengwan.github.io/2015/01/22/process_status"/>
-   <updated>2015-01-22T00:00:00+08:00</updated>
-   <id>http://yutengwan.github.io/2015/01/22/process_status</id>
-   <content type="html">&lt;h3&gt;svn status:&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;U:&lt;/strong&gt; working file was uploaded,工作目录更新&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;G:&lt;/strong&gt; Changes on the repo were automatically merged into the working copy，版本自动merge上去&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;M:&lt;/strong&gt; Working copy is modify,文件修改&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;C:&lt;/strong&gt; The file conflicts with the version in the repo文件在版本库中冲突&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;?:&lt;/strong&gt; The file is not under version control 文件不在版本库中&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;!:&lt;/strong&gt; The file is under version control but is missing or incomplete 文件在版本库中，但是没有使用svn删除或不完整&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; The file will be added to version control(after commit)新增文件&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;A+:&lt;/strong&gt; The file will be moved (after commit)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;D:&lt;/strong&gt;  The file will be deleted (after commit)文件被移除版本库&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;S:&lt;/strong&gt;  This signifies that the file or directory has been switched from the path of the rest of the working copy (using svn switch) to a branch&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;I:&lt;/strong&gt; Ignored&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;R:&lt;/strong&gt; Item has been replaced in your working copy. This means the file was scheduled for deletion, and then a new file with the same name was scheduled for addition in its place.&lt;/p&gt;
 </content>
  </entry>
  

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>svn status的各种状态的说明</title>
+    <title>进程的状态</title>
     
     <meta name="author" content="yutengwan">
 
@@ -131,40 +131,105 @@
       <div class="container">
         
 <div class="page-header">
-  <h1>svn status的各种状态的说明 </h1>
+  <h1>进程的状态 </h1>
 </div>
 
 <div class="row post-full">
   <div class="col-xs-12">
     <div class="date">
-      <span>22 January 2015</span>
+      <span>23 January 2015</span>
     </div>
     <div class="content">
-      <h3>svn status:</h3>
+      <h2>Linux 下的进程状态：</h2>
 
-<p><strong>U:</strong> working file was uploaded,工作目录更新</p>
+<p>首先查看进程状态的命令PS</p>
 
-<p><strong>G:</strong> Changes on the repo were automatically merged into the working copy，版本自动merge上去</p>
+<p>PS的用法：ps  -  parameter</p>
 
-<p><strong>M:</strong> Working copy is modify,文件修改</p>
+<p>常用参数：</p>
 
-<p><strong>C:</strong> The file conflicts with the version in the repo文件在版本库中冲突</p>
+<p><code>-A</code> 显示所有的进程(等价于<code>-e</code>)</p>
 
-<p><strong>?:</strong> The file is not under version control 文件不在版本库中</p>
+<p><code>-a</code> 显示一个终端的所有进程</p>
 
-<p><strong>!:</strong> The file is under version control but is missing or incomplete 文件在版本库中，但是没有使用svn删除或不完整</p>
+<p><code>c</code>   显示进程的真实名称</p>
 
-<p><strong>A:</strong> The file will be added to version control(after commit)新增文件</p>
+<p><code>-e</code>  等价于<code>-A</code></p>
 
-<p><strong>A+:</strong> The file will be moved (after commit)</p>
+<p><code>-N</code>  忽略选择</p>
 
-<p><strong>D:</strong>  The file will be deleted (after commit)文件被移除版本库</p>
+<p><code>-d</code>  显示所有进程，但是省略所有的会话引线</p>
 
-<p><strong>S:</strong>  This signifies that the file or directory has been switched from the path of the rest of the working copy (using svn switch) to a branch</p>
+<p><code>-x</code>  显示没有控制终端的进程，同时显示各个命令的具体路径。<code>dx</code>  不可合用</p>
 
-<p><strong>I:</strong> Ignored</p>
+<p><code>-p</code> pid进程使用cpu时间</p>
 
-<p><strong>R:</strong> Item has been replaced in your working copy. This means the file was scheduled for deletion, and then a new file with the same name was scheduled for addition in its place.</p>
+<p><code>-u</code> uid or username选择有效的用户id或者用户名</p>
+
+<p><code>-g</code> gid or groupname 显示组的所有进程</p>
+
+<p><code>U</code>  username显示该用户下的所有进程，且显示各个命令的线下路径ps U zhangsan</p>
+
+<p><code>-f</code> 全部列出，通常和显示选项联用。ps -fa or ps -fx</p>
+
+<p><code>-m</code> 显示所有的线程</p>
+
+<p><code>-H</code> 显示进程的层次 ps -Ha</p>
+
+<hr>
+
+
+<h4>ps -aux输出格式</h4>
+
+<p><code>USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND USER</code></p>
+
+<p><code>USER</code> 进程拥有者</p>
+
+<p><code>PID</code> 进程pid</p>
+
+<p><code>%CPU</code> 占用cpu的使用率</p>
+
+<p><code>%MEM</code> 占用内存大小</p>
+
+<p><code>VSZ</code> 占用虚拟内存大小</p>
+
+<p><code>RSS</code>  占用物理内存</p>
+
+<p><code>TTY</code> linux的终端号pts/1</p>
+
+<hr>
+
+
+<p><strong><code>STAT</code>  运行的状态：</strong></p>
+
+<ul>
+<li><p>D：不可中断终端的休眠状态(IO进程)</p></li>
+<li><p>R：正在运行，在可中断队列中</p></li>
+<li><p>S：处于休眠状态，静止状态</p></li>
+<li><p>T：停止或被跟踪，暂停执行</p></li>
+<li><p>W：进入内存交换</p></li>
+<li><p>X：杀死的进程</p></li>
+<li><p>Z：僵死进程不存在但暂时无法消除</p></li>
+<li><p>S：进程的领导者(在它之下有子进程)</p></li>
+<li><p>l：多进程的(CLONE_THREAD,类似NPTL pthreads)</p></li>
+<li><p>+：位于后台的进程组</p></li>
+</ul>
+
+
+<hr>
+
+
+<h4>Kill终止进程有十几种控制进程的方法</h4>
+
+<p><code>kill -STOP [pid]</code>发送SIGSTOP(17,19,23)停止一个进程，而不消灭这个进程</p>
+
+<p><code>kill -CONT [pid]</code> 发送SIGCONT(19,18,25)重新开始一个停止进程</p>
+
+<p><code>kill -KILL [pid]</code> 发送SIGKILL(9)强迫进程立即停止，不实施清理操作</p>
+
+<p><code>kill -9 -1</code> 终止你拥有的全部进程</p>
+
+<p>SIGKILL和SIGSTOP信号不能被，封锁或者忽略，但是，其他信号可以</p>
 
     </div>
 
@@ -175,11 +240,11 @@
     <hr>
     <ul class="pagination">
     
-      <li class="prev"><a href="/2015/01/13/first_post" title="my first post">&laquo; Previous</a></li>
+      <li class="prev"><a href="/2015/01/23/extern_cplusplus" title="C++ extern">&laquo; Previous</a></li>
     
       <li><a href="/archive.html">Archive</a></li>
     
-      <li class="next"><a href="/2015/01/23/extern_cplusplus" title="C++ extern">Next &raquo;</a></li>
+      <li class="next"><a href="/2015/01/23/svn_status" title="svn status的各种状态的说明">Next &raquo;</a></li>
     
     </ul>
     <hr>
