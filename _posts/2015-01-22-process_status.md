@@ -39,6 +39,7 @@ PS的用法：ps  -  parameter
 
 `-H` 显示进程的层次 ps -Ha
 
+<hr>
 #### ps -aux输出格式
 
 `USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND USER`
@@ -57,6 +58,7 @@ PS的用法：ps  -  parameter
 
 `TTY` linux的终端号pts/1
 
+<hr>
 **`STAT`  运行的状态：**
 
  - D：不可中断终端的休眠状态(IO进程)
@@ -79,6 +81,7 @@ PS的用法：ps  -  parameter
 
  - +：位于后台的进程组
 
+<hr>
 #### Kill终止进程有十几种控制进程的方法
 
 `kill -STOP [pid]`发送SIGSTOP(17,19,23)停止一个进程，而不消灭这个进程
@@ -91,9 +94,4 @@ PS的用法：ps  -  parameter
 
 SIGKILL和SIGSTOP信号不能被，封锁或者忽略，但是，其他信号可以
 
-```shell
-function() {
-
-}
-```
 
