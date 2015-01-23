@@ -1,97 +1,30 @@
 ---
 layout : post
-title : 进程的状态
+title : svn status的各种状态的说明
 ---
 
-## Linux 下的进程状态：
+### svn status:
 
-首先查看进程状态的命令PS
+**U:** working file was uploaded,工作目录更新
 
-PS的用法：ps  -  parameter
+**G:** Changes on the repo were automatically merged into the working copy，版本自动merge上去
 
-常用参数：
+**M:** Working copy is modify,文件修改
 
-`-A` 显示所有的进程(等价于`-e`)
+**C:** The file conflicts with the version in the repo文件在版本库中冲突
 
-`-a` 显示一个终端的所有进程
+**?:** The file is not under version control 文件不在版本库中
 
-`c`   显示进程的真实名称
+**!:** The file is under version control but is missing or incomplete 文件在版本库中，但是没有使用svn删除或不完整
 
-`-e`  等价于`-A`
+**A:** The file will be added to version control(after commit)新增文件
 
-`-N`  忽略选择
+**A+:** The file will be moved (after commit)
 
-`-d`  显示所有进程，但是省略所有的会话引线
+**D:**  The file will be deleted (after commit)文件被移除版本库
 
-`-x`  显示没有控制终端的进程，同时显示各个命令的具体路径。`dx`  不可合用
+**S:**  This signifies that the file or directory has been switched from the path of the rest of the working copy (using svn switch) to a branch
 
-`-p` pid进程使用cpu时间
+**I:** Ignored
 
-`-u` uid or username选择有效的用户id或者用户名
-
-`-g` gid or groupname 显示组的所有进程
-
-`U`  username显示该用户下的所有进程，且显示各个命令的线下路径ps U zhangsan
-
-`-f` 全部列出，通常和显示选项联用。ps -fa or ps -fx
-
-`-m` 显示所有的线程
-
-`-H` 显示进程的层次 ps -Ha
-
-<hr>
-#### ps -aux输出格式
-
-`USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND USER`
-
-`USER` 进程拥有者
-
-`PID` 进程pid
-
-`%CPU` 占用cpu的使用率
-
-`%MEM` 占用内存大小
-
-`VSZ` 占用虚拟内存大小
-
-`RSS`  占用物理内存
-
-`TTY` linux的终端号pts/1
-
-<hr>
-**`STAT`  运行的状态：**
-
- - D：不可中断终端的休眠状态(IO进程)
-
- - R：正在运行，在可中断队列中
-
- - S：处于休眠状态，静止状态
-
- - T：停止或被跟踪，暂停执行
-
- - W：进入内存交换
-
- - X：杀死的进程
-
- - Z：僵死进程不存在但暂时无法消除
-
- - S：进程的领导者(在它之下有子进程)
-
- - l：多进程的(CLONE_THREAD,类似NPTL pthreads)
-
- - +：位于后台的进程组
-
-<hr>
-#### Kill终止进程有十几种控制进程的方法
-
-`kill -STOP [pid]`发送SIGSTOP(17,19,23)停止一个进程，而不消灭这个进程
-
-`kill -CONT [pid]` 发送SIGCONT(19,18,25)重新开始一个停止进程
-
-`kill -KILL [pid]` 发送SIGKILL(9)强迫进程立即停止，不实施清理操作
-
-`kill -9 -1` 终止你拥有的全部进程
-
-SIGKILL和SIGSTOP信号不能被，封锁或者忽略，但是，其他信号可以
-
-
+**R:** Item has been replaced in your working copy. This means the file was scheduled for deletion, and then a new file with the same name was scheduled for addition in its place.
