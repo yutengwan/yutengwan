@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>svn status的各种状态的说明</title>
+    <title>gcc</title>
     
     <meta name="author" content="yutengwan">
 
@@ -131,40 +131,35 @@
       <div class="container">
         
 <div class="page-header">
-  <h1>svn status的各种状态的说明 </h1>
+  <h1>gcc </h1>
 </div>
 
 <div class="row post-full">
   <div class="col-xs-12">
     <div class="date">
-      <span>23 January 2015</span>
+      <span>27 January 2015</span>
     </div>
     <div class="content">
-      <h3>svn status:</h3>
+      <h3>gcc基本用法</h3>
 
-<p><strong>U:</strong> working file was uploaded,工作目录更新</p>
+<pre><code class="shell">gcc -g -Wall main.c -o main
+./main
+</code></pre>
 
-<p><strong>G:</strong> Changes on the repo were automatically merged into the working copy，版本自动merge上去</p>
+<p><code>-Wall</code>开启编译器几乎所有常用的警告(推荐使用此选项)</p>
 
-<p><strong>M:</strong> Working copy is modify,文件修改</p>
+<p><code>-g</code> 生成的目标文件中带调试信息，调试信息可以在程序异常中止产生core后，帮助分析错误产生的源头，包括产生错误的文件名和行号等非常多有用的信息。</p>
 
-<p><strong>C:</strong> The file conflicts with the version in the repo文件在版本库中冲突</p>
+<p>c编程相关文件后缀：</p>
 
-<p><strong>?:</strong> The file is not under version control 文件不在版本库中</p>
+<ul>
+<li><code>.a</code>静态库(archive)</li>
+<li><code>.i</code>源代码(不需要编译预处理)</li>
+<li><code>.o</code>对象文件</li>
+<li><code>.s</code>汇编语言代码</li>
+<li><code>.so</code>动态库</li>
+</ul>
 
-<p><strong>!:</strong> The file is under version control but is missing or incomplete 文件在版本库中，但是没有使用svn删除或不完整</p>
-
-<p><strong>A:</strong> The file will be added to version control(after commit)新增文件</p>
-
-<p><strong>A+:</strong> The file will be moved (after commit)</p>
-
-<p><strong>D:</strong>  The file will be deleted (after commit)文件被移除版本库</p>
-
-<p><strong>S:</strong>  This signifies that the file or directory has been switched from the path of the rest of the working copy (using svn switch) to a branch</p>
-
-<p><strong>I:</strong> Ignored</p>
-
-<p><strong>R:</strong> Item has been replaced in your working copy. This means the file was scheduled for deletion, and then a new file with the same name was scheduled for addition in its place.</p>
 
     </div>
 
@@ -175,11 +170,11 @@
     <hr>
     <ul class="pagination">
     
-      <li class="prev"><a href="/2015/01/23/process_st" title="进程的状态">&laquo; Previous</a></li>
+      <li class="prev"><a href="/2015/01/26/yii_RBAC" title="yii RBAC">&laquo; Previous</a></li>
     
       <li><a href="/archive.html">Archive</a></li>
     
-      <li class="next"><a href="/2015/01/25/makefile" title="makefile">Next &raquo;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
     
     </ul>
     <hr>

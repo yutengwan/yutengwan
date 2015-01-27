@@ -4,13 +4,311 @@
  <title>Brady 丶 一点一滴</title>
  <link href="http://yutengwan.github.io/" rel="self"/>
  <link href="http://yutengwan.github.io"/>
- <updated>2015-01-25T14:36:34+08:00</updated>
+ <updated>2015-01-27T19:21:37+08:00</updated>
  <id>http://yutengwan.github.io</id>
  <author>
    <name>yutengwan</name>
    <email>yutengwan@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>gcc</title>
+   <link href="http://yutengwan.github.io/2015/01/27/gcc"/>
+   <updated>2015-01-27T00:00:00+08:00</updated>
+   <id>http://yutengwan.github.io/2015/01/27/gcc</id>
+   <content type="html">&lt;h3&gt;gcc基本用法&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;gcc -g -Wall main.c -o main
+./main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;-Wall&lt;/code&gt;开启编译器几乎所有常用的警告(推荐使用此选项)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-g&lt;/code&gt; 生成的目标文件中带调试信息，调试信息可以在程序异常中止产生core后，帮助分析错误产生的源头，包括产生错误的文件名和行号等非常多有用的信息。&lt;/p&gt;
+
+&lt;p&gt;c编程相关文件后缀：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.a&lt;/code&gt;静态库(archive)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.i&lt;/code&gt;源代码(不需要编译预处理)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.o&lt;/code&gt;对象文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.s&lt;/code&gt;汇编语言代码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.so&lt;/code&gt;动态库&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>yii RBAC</title>
+   <link href="http://yutengwan.github.io/2015/01/26/yii_RBAC"/>
+   <updated>2015-01-26T00:00:00+08:00</updated>
+   <id>http://yutengwan.github.io/2015/01/26/yii_RBAC</id>
+   <content type="html">&lt;p&gt;在权限控制过程中，会有一个默认的角色在:&lt;code&gt;CAuthManager::defaultRoles&lt;/code&gt;属性中&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;php&quot;&gt;return array(
+    &#39;components&#39;=&amp;gt;array(
+        &#39;authManager&#39;=&amp;gt;array(
+            &#39;class&#39;=&amp;gt;&#39;CDbAuthManager&#39;,
+            &#39;defaultRoles&#39;=&amp;gt;array(&#39;user&#39;),
+        ),
+    ),
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;默认角色会分配给每个用户，所以在定义Role时一般都会确定一下是否应用到用户&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;php&quot;&gt;$bizRule = &#39;return Yii::app()-&amp;gt;user-&amp;gt;isUser()&#39;;   //isUser()在WebUser.php中定义
+$auth-&amp;gt;createRole(&#39;user&#39;,&#39;normal user&#39;,$bizRule);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在使用$bizRule中的规则时，切记&lt;code&gt;return ...;&lt;/code&gt;,后面的分号一定要写，我就是被这个小问题坑了老长时间的&lt;/p&gt;
+
+&lt;p&gt;还有在使用这个checkAccess中用户角色时，他都是从auth_assignment表中获取表的角色，不能通过外部判断结构进行判断，比如：&lt;code&gt;$role = $auth-&amp;gt;createRole(&#39;root&#39;,&#39;超级管理员&#39;,&#39;return Yii::app()-&amp;gt;user-&amp;gt;isRoot()&#39;);&lt;/code&gt; 这种情况在&lt;code&gt;Yii::app()-&amp;gt;user-&amp;gt;checkAccess(&#39;root&#39;)&lt;/code&gt;判断永远是false的，它会先从auth_assignment表中获取角色对象：&lt;/p&gt;
+
+&lt;p&gt;yii中checkAccess部分源码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;php&quot;&gt;public function checkAccess($itemName,$userId,$params=array()) {
+    $assignments=$this-&amp;gt;getAuthAssignments($userId);
+    return $this-&amp;gt;checkAccessRecursive($itemName,$userId,$params,$assignments);
+}
+
+public function getAuthAssignment($itemName,$userId){
+    $row=$this-&amp;gt;db-&amp;gt;createCommand()
+        -&amp;gt;select()
+        -&amp;gt;from($this-&amp;gt;assignmentTable)
+        -&amp;gt;where(&#39;itemname=:itemname AND userid=:userid&#39;, array(
+            &#39;:itemname&#39;=&amp;gt;$itemName,
+            &#39;:userid&#39;=&amp;gt;$userId))
+        -&amp;gt;queryRow();
+    if($row!==false){
+        if(($data=@unserialize($row[&#39;data&#39;]))===false)
+            $data=null;
+        return new CAuthAssignment($this,$row[&#39;itemname&#39;],$row[&#39;userid&#39;],$row[&#39;bizrule&#39;],$data);
+    }
+    else
+        return null;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;同时在使用RBAC时，如果想要实现动态的切换权限的设置，则需要在外部接口判断该用户是否为root，user可以在WebUser中进行切换对象&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;php&quot;&gt;&amp;lt;?php
+public function changeRole($role = null) {
+    $role = strtolower($role);
+    if (($role == &#39;user&#39;) || ($role == &#39;root&#39; &amp;amp;&amp;amp; $this-&amp;gt;isAdmin())) {           /
+        $userID = Yii::app()-&amp;gt;user-&amp;gt;getId();
+        $auth = Yii::app()-&amp;gt;authManager;
+        if ($auth-&amp;gt;isAssigned($this-&amp;gt;getRole(),$userID)) {
+            $auth-&amp;gt;revoke($this-&amp;gt;getRole(),$userID);
+            $auth-&amp;gt;assign($role,$userID);   
+        } esle {
+            $auth-&amp;gt;assign($role,$userID);
+        }
+    }
+}
+?&amp;gt;
+
+这个isAdmin()是指在外部判断该用户的最高权限，这样就可切换到它的下面的权限浏览
+$this-&amp;gt;getRole = $this-&amp;gt;getState(&#39;-role&#39;);
+$auth的其他方法可以查看yii提供的函数
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里就是通过对auth_assignment数据库表的修改实现动态切换用户的权限的  &lt;a href=&quot;https://github.com/yiisoft/yii/tree/1.1.16/framework/web/auth&quot;&gt;yii AuthManager&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>makefile</title>
+   <link href="http://yutengwan.github.io/2015/01/25/makefile"/>
+   <updated>2015-01-25T00:00:00+08:00</updated>
+   <id>http://yutengwan.github.io/2015/01/25/makefile</id>
+   <content type="html">&lt;blockquote&gt;&lt;p&gt;makefile主要是把需要编译的源文件的命令集合到一个文件中，这样就不需要每次都把文件依次编译一遍，而只需执行这个文件就可以一次性编译,生成可执行文件。其实也可以看作成一个shell命令&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;同时他也定义了一系列的规则，
+比如先编译文件的先后顺序，它实现的是&lt;code&gt;自动化编译过程&lt;/code&gt;,一旦写好了，只需一个make命令，整个工程就自动编译，提供了我们开发的效率(但是再windows下没有这个工具，因为我们的IDE已经为我们做了这一步)。&lt;/p&gt;
+
+&lt;p&gt;这里的话，可以说一下代码编译过程，对于c/c++程序首先需要将源文件编译成中间目标代码文件(.o object file)，这个就是&lt;code&gt;编译(compile)&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;然后把大量的Object file合成可执行文件，这个动作就是&lt;code&gt;链接(link)&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;在链接时，主要是链接函数和全局变量，故我们使用这些中间代码文件来链接我们的应用程序。在链接的时候连接器不管函数所在的源文件，只管函数的中间目标文件，在大多数情况下，源文件太多，编译生成的中间目标文件太多，而在链接时，需要明显地指出中间目标文件名，但是由于编译的不方便，一般的话都会给中间目标文件打个包，在windows下就是&lt;code&gt;库文件(.lib library file)&lt;/code&gt;，在unix下是&lt;code&gt;.a Archive file&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3&gt;makefile的一些基本规则&lt;/h3&gt;
+
+&lt;p&gt;makefile文件有三部分：
+- target：目标文件，就是最后的执行文件
+- prerequisite：要生成target所需要的文件或是目标(依赖文件)
+- command：make需要执行的命令&lt;/p&gt;
+
+&lt;p&gt;例如下面一个工程里有三个头文件，8个c文件&lt;/p&gt;
+
+&lt;p&gt;defs.h.command.h,buffer.h&lt;/p&gt;
+
+&lt;p&gt;main.c,kdb.c,command.c,display.c,insert.c,search.c,files.c,utils.c&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;makefile&quot;&gt;edit : main.o,kdb.o,command.o,display.o,insert.o,\ 
+        search.o,files.o,utils.o                      /*如果后面这些.o文件比edit可执行文件新,那么才会去执行下面这句命令*/
+        gcc -o edit main.o,kdb.o,command.o,display.o,insert.o,\ 
+        search.o,files.o,utils.o
+main.o : main.c defs.h
+        gcc -c main.c
+kdb.o : kdb.c defs.h
+        gcc -c kdb.c
+command.o : command.c defs.h command.h
+        gcc -c command.c
+display.o : display.c defs.h buffer.h
+        gcc -c display.c
+insert.o : insert.c defs.h buffer.h
+        gcc -c insert.c
+search.o : search.c defs.h buffer.h
+        gcc -c search.c
+files.o : files.c defs.h buffer.h command.h
+        gcc -c files.c
+utils.o : utils.c defs.h
+        gcc -c utils.c
+
+clean:
+        rm edit main.o,kdb.o,command.o,display.o,insert.o,\
+        search.o,files.o,utils.o
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这段makefile的只有执行make就会生成执行文件edit，如果需要删除中间目标文件只需执行make clean&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;target：edit和中间目标文件(*.o)&lt;/li&gt;
+&lt;li&gt;prerequisite：冒号(:)后面的.c和.h文件&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;make工作流程&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;make会在当前目录下找名字为&lt;code&gt;Makefile&lt;/code&gt;或&lt;code&gt;makefile&lt;/code&gt;文件&lt;/li&gt;
+&lt;li&gt;如果找到，找到文件中的第一个目标文件(target)，如上面例子:edit文件&lt;/li&gt;
+&lt;li&gt;如果edit文件不存在，或者edit所依赖的后面的.o文件的文件修改时间比edit这个文件新，那么，他就执行后面需要的命令生成edit文件&lt;/li&gt;
+&lt;li&gt;如果edit所依赖的.o文件也不存在，那么make会在当前文件中找目标为.o文件的依赖性，如果找到则会根据依赖关系生成.o文件&lt;/li&gt;
+&lt;li&gt;当你的C文件和H文件都存在时，于是make会生成.o文件，然后再用.o文件生成make的最终可执行文件edit&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;这就是整个make的依赖性，make会一层又一层地去找文件的依赖关系，直到最终编译出第一个目标文件。在找寻的过程中，如果出现错误，比如最后被依赖的文件找不到，那么make就会直接退出，并报错，而对于所定义的命令的错误，或是编译不成功，make根本不理。make只管文件的依赖性，即，如果在我找了依赖关系之后，冒号后面的文件还是不在，那还是会直接退出。&lt;/p&gt;
+
+&lt;p&gt;在编译通过之后，当我们修改了其中一个源文件，比如files.c文件，那么根据我们的依赖关系，我们的目标文件files.o会重新编译一遍，于是files.o是最新的，但是edit还不是最新，所有edit也会重新链接。&lt;/p&gt;
+
+&lt;p&gt;如果我们修改了&quot;command.h&quot;,那么kdb.o,command.o,files.o都会重新编译，并且edit会重新链接。&lt;/p&gt;
+
+&lt;h3&gt;makefile中的变量&lt;/h3&gt;
+
+&lt;p&gt;在makefile中一些文件需要被重复使用，那么我们就可以使用变量来对他们进行声明和使用：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;makefile&quot;&gt;objects = main.o kbd.o command.o display.o\
+          insert.o search.o files.o utils.o
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在使用变量之后一些表达式就可以变得非常简单可用了，在makefile里面使用变量以&lt;code&gt;$(objects)&lt;/code&gt;这种方式来使用变量。下面我们就可以把上面的例子简写成：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;makefile&quot;&gt;objects = main.o,kdb.o,command.o,display.o,\
+          insert.o, search.o,files.o,utils.o 
+edit : $(objects)
+        gcc -o edit $(objects)
+main.o : main.c defs.h
+        gcc -c main.c
+kdb.o : kdb.c defs.h
+        gcc -c kdb.c
+command.o : command.c defs.h command.h
+        gcc -c command.c
+display.o : display.c defs.h buffer.h
+        gcc -c display.c
+insert.o : insert.c defs.h buffer.h
+        gcc -c insert.c
+search.o : search.c defs.h buffer.h
+        gcc -c search.c
+files.o : files.c defs.h buffer.h command.h
+        gcc -c files.c
+utils.o : utils.c defs.h
+        gcc -c utils.c
+
+clean:
+        rm edit $(objects)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;makefile 自动推导功能&lt;/h3&gt;
+
+&lt;p&gt;GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个[.o]文件后都写上类似的命令，因为，我们的make会自动识别，并自己推导命令。&lt;/p&gt;
+
+&lt;p&gt;只要make看到一个[.o]文件，它就会自动的把[.c]文件加在依赖关系中，如果make找到一个whatever.o，那么 whatever.c，就会是whatever.o的依赖文件。并且 cc -c whatever.c 也会被推导出来，于是，我们的makefile 再也不用写得这么复杂。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;makefile&quot;&gt;objects = main.o,kdb.o,command.o,display.o,\
+          insert.o, search.o,files.o,utils.o 
+edit : $(objects)
+        gcc -o edit $(objects)
+main.o : defs.h
+kdb.o : defs.h
+command.o : defs.h command.h
+display.o : defs.h buffer.h
+insert.o : defs.h buffer.h
+search.o : defs.h buffer.h
+files.o : defs.h buffer.h command.h
+utils.o : defs.h
+
+.PHONE : clean
+clean:
+        rm edit $(objects)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;.PHONE&lt;/code&gt;表示clean是一个伪目标文件&lt;/p&gt;
+
+&lt;h3&gt;makefile文件里有什么&lt;/h3&gt;
+
+&lt;p&gt;makefile文件主要有5个东西：显式规则，隐晦规则，变量定义，文件指示和注释。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;显式规则：显式规则说明了，如何生成一个或多个目标文件。这是由Makefile的书写者明显指出，要生成的文件，文件的依赖文件，生成的命令。&lt;/li&gt;
+&lt;li&gt;隐晦规则：由于我们的make有自动推导的功能，所以隐晦的规则可以让我们比较简略地书写Makefile，这是由make所支持的。&lt;/li&gt;
+&lt;li&gt;变量的定义：在Makefile中我们要定义一系列的变量，变量一般都是字符串，这个有点像你C语言中的宏，当Makefile被执行时，其中的变量都会被扩展到相应的引用位置上。&lt;/li&gt;
+&lt;li&gt;文件指示：其包括了三个部分，一个是在一个Makefile中引用另一个Makefile，就像C语言中的include一样；另一个是指根据某些情况指定Makefile中的有效部分，就像C语言中的预编译#if一样；还有就是定义一个多行的命令。有关这一部分的内容，我会在后续的部分中讲述。&lt;/li&gt;
+&lt;li&gt;注释：Makefile中只有行注释，和UNIX的Shell脚本一样，其注释是用“#”字符，这个就像C/C++中的“//”一样。如果你要在你的Makefile中使用“#”字符，可以用反斜杠进行转义，如：“#”。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;blockquote&gt;&lt;p&gt;另外：在Makefile中的命令，必须要以&lt;code&gt;Tab&lt;/code&gt;键开始。&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;引用其他的MakeFile&lt;/h3&gt;
+
+&lt;p&gt;在Makefile使用include关键字可以把别的Makefile包含进来，这很像C语言的#include，被包含的文件会原模原样的放在当前文件的包含位置。include的语法是：
+&lt;code&gt;makefile
+include &amp;lt;filename&amp;gt;
+&lt;/code&gt;
+在include前面可以有一些空字符，但是绝不能是[Tab]键开始。include和&lt;filename&gt;;可以用一个或多个空格隔开。举个例子，你有这样几个Makefile：a.mk,b.mk,c.mk，还有一个文件叫foo.make，以及一个变量$(bar)，其包含了 e.mk和f.mk，那么，下面的语句：
+&lt;code&gt;makefile
+include foo.make *.mk $(bar)
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;等价于：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;makefile&quot;&gt;include foo.make a.mk b.mk c.mk e.mk f.mk
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;make的工作方式：&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;读入所有的makefile&lt;/li&gt;
+&lt;li&gt;读入被include的其他的makefile&lt;/li&gt;
+&lt;li&gt;初始化文件中的变量&lt;/li&gt;
+&lt;li&gt;推导隐晦规则，并分析所有规则&lt;/li&gt;
+&lt;li&gt;为所有的目标文件创建依赖关系链&lt;/li&gt;
+&lt;li&gt;根据依赖关系，决定哪些目标要重新生成&lt;/li&gt;
+&lt;li&gt;执行生成命令&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;1-5步为第一个阶段，6-7为第二个阶段。第一个阶段中，如果定义的变量被使用了，那么，make会把其展开在使用的位置。但make并不会完全马上展开，make使用的是拖延战术，如果变量出现在依赖关系的规则中，那么仅当这条依赖被决定要使用了，变量才会在其内部展开。&lt;/p&gt;
+
+&lt;p&gt; &lt;a href=&quot;http://wiki.ubuntu.org.cn/%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%86%99Makefile&quot;&gt;参考&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>svn status的各种状态的说明</title>
@@ -203,7 +501,7 @@ int foo(int x,int y);
 foo(2,3);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;实际上，在连接阶段，连接器会从模块A生成的目标文件moduleA.obj中寻找foo_int_int这样的符号&lt;/p&gt;
+&lt;p&gt;实际上，在连接阶段，连接器会从模块A生成的目标文件moduleA.o中寻找foo_int_int这样的符号&lt;/p&gt;
 
 &lt;p&gt;在加上extern &amp;ldquo;C&quot;声明后的编译和连接方式：&lt;/p&gt;
 

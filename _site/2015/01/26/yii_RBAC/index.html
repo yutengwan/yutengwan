@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>svn status的各种状态的说明</title>
+    <title>yii RBAC</title>
     
     <meta name="author" content="yutengwan">
 
@@ -131,72 +131,83 @@
       <div class="container">
         
 <div class="page-header">
-  <h1>svn status的各种状态的说明 </h1>
+  <h1>yii RBAC </h1>
 </div>
 
-<div class="row post-full">
+<div class="row">
   <div class="col-xs-12">
-    <div class="date">
-      <span>23 January 2015</span>
-    </div>
-    <div class="content">
-      <h3>svn status:</h3>
+    <p>在权限控制过程中，会有一个默认的角色在:<code>CAuthManager::defaultRoles</code>属性中</p>
 
-<p><strong>U:</strong> working file was uploaded,工作目录更新</p>
+<pre><code class="php">return array(
+    'components'=&gt;array(
+        'authManager'=&gt;array(
+            'class'=&gt;'CDbAuthManager',
+            'defaultRoles'=&gt;array('user'),
+        ),
+    ),
+);
+</code></pre>
 
-<p><strong>G:</strong> Changes on the repo were automatically merged into the working copy，版本自动merge上去</p>
+<p>默认角色会分配给每个用户，所以在定义Role时一般都会确定一下是否应用到用户</p>
 
-<p><strong>M:</strong> Working copy is modify,文件修改</p>
+<pre><code class="php">$bizRule = 'return Yii::app()-&gt;user-&gt;isUser()';   //isUser()在WebUser.php中定义
+$auth-&gt;createRole('user','normal user',$bizRule);
+</code></pre>
 
-<p><strong>C:</strong> The file conflicts with the version in the repo文件在版本库中冲突</p>
+<p>在使用$bizRule中的规则时，切记<code>return ...;</code>,后面的分号一定要写，我就是被这个小问题坑了老长时间的</p>
 
-<p><strong>?:</strong> The file is not under version control 文件不在版本库中</p>
+<p>还有在使用这个checkAccess中用户角色时，他都是从auth_assignment表中获取表的角色，不能通过外部判断结构进行判断，比如：<code>$role = $auth-&gt;createRole('root','超级管理员','return Yii::app()-&gt;user-&gt;isRoot()');</code> 这种情况在<code>Yii::app()-&gt;user-&gt;checkAccess('root')</code>判断永远是false的，它会先从auth_assignment表中获取角色对象：</p>
 
-<p><strong>!:</strong> The file is under version control but is missing or incomplete 文件在版本库中，但是没有使用svn删除或不完整</p>
+<p>yii中checkAccess部分源码：</p>
 
-<p><strong>A:</strong> The file will be added to version control(after commit)新增文件</p>
+<pre><code class="php">public function checkAccess($itemName,$userId,$params=array()) {
+    $assignments=$this-&gt;getAuthAssignments($userId);
+    return $this-&gt;checkAccessRecursive($itemName,$userId,$params,$assignments);
+}
 
-<p><strong>A+:</strong> The file will be moved (after commit)</p>
+public function getAuthAssignment($itemName,$userId){
+    $row=$this-&gt;db-&gt;createCommand()
+        -&gt;select()
+        -&gt;from($this-&gt;assignmentTable)
+        -&gt;where('itemname=:itemname AND userid=:userid', array(
+            ':itemname'=&gt;$itemName,
+            ':userid'=&gt;$userId))
+        -&gt;queryRow();
+    if($row!==false){
+        if(($data=@unserialize($row['data']))===false)
+            $data=null;
+        return new CAuthAssignment($this,$row['itemname'],$row['userid'],$row['bizrule'],$data);
+    }
+    else
+        return null;
+}
+</code></pre>
 
-<p><strong>D:</strong>  The file will be deleted (after commit)文件被移除版本库</p>
+<p>同时在使用RBAC时，如果想要实现动态的切换权限的设置，则需要在外部接口判断该用户是否为root，user可以在WebUser中进行切换对象</p>
 
-<p><strong>S:</strong>  This signifies that the file or directory has been switched from the path of the rest of the working copy (using svn switch) to a branch</p>
+<pre><code class="php">&lt;?php
+public function changeRole($role = null) {
+    $role = strtolower($role);
+    if (($role == 'user') || ($role == 'root' &amp;&amp; $this-&gt;isAdmin())) {           /
+        $userID = Yii::app()-&gt;user-&gt;getId();
+        $auth = Yii::app()-&gt;authManager;
+        if ($auth-&gt;isAssigned($this-&gt;getRole(),$userID)) {
+            $auth-&gt;revoke($this-&gt;getRole(),$userID);
+            $auth-&gt;assign($role,$userID);   
+        } esle {
+            $auth-&gt;assign($role,$userID);
+        }
+    }
+}
+?&gt;
 
-<p><strong>I:</strong> Ignored</p>
+这个isAdmin()是指在外部判断该用户的最高权限，这样就可切换到它的下面的权限浏览
+$this-&gt;getRole = $this-&gt;getState('-role');
+$auth的其他方法可以查看yii提供的函数
+</code></pre>
 
-<p><strong>R:</strong> Item has been replaced in your working copy. This means the file was scheduled for deletion, and then a new file with the same name was scheduled for addition in its place.</p>
+<p>这里就是通过对auth_assignment数据库表的修改实现动态切换用户的权限的  <a href="https://github.com/yiisoft/yii/tree/1.1.16/framework/web/auth">yii AuthManager</a></p>
 
-    </div>
-
-    
-
-    
-  
-    <hr>
-    <ul class="pagination">
-    
-      <li class="prev"><a href="/2015/01/23/process_st" title="进程的状态">&laquo; Previous</a></li>
-    
-      <li><a href="/archive.html">Archive</a></li>
-    
-      <li class="next"><a href="/2015/01/25/makefile" title="makefile">Next &raquo;</a></li>
-    
-    </ul>
-    <hr>
-     <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'yutengwan'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    
   </div>
 </div>
 

@@ -60,7 +60,7 @@ int foo(int x,int y);
 #include "moduleA.h"
 foo(2,3);
 ```
-实际上，在连接阶段，连接器会从模块A生成的目标文件moduleA.obj中寻找foo_int_int这样的符号
+实际上，在连接阶段，连接器会从模块A生成的目标文件moduleA.o中寻找foo_int_int这样的符号
 
 在加上extern "C"声明后的编译和连接方式：
 

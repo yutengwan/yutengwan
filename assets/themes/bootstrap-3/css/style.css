@@ -12,13 +12,16 @@
 /* Replaced with standard BS3 Navbar */
 /*.navbar .nav {
   float: right; }*/
-
+.container {
+  font-size: 1.3em;
+}
 /* Jekyll Bootstrap Colors */
 h1, h2, h3, h4 {
-  color: #f22430;
+  color: #00CCFF;
 }
 #footer {
-  background-color: #fdcd60;
+  font-size: 0.5em;
+  background-color: white;
 }
 
 
@@ -31,7 +34,7 @@ h1, h2, h3, h4 {
 .post > h3.title span.date {
   position: absolute;
   right: 0;
-  font-size: 0.9em; }
+  font-size: 1.4em; }
 
 .post > .more {
   margin: 10px 0;
