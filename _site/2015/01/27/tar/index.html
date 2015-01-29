@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Archive</title>
+    <title>tar</title>
     
     <meta name="author" content="yutengwan">
 
@@ -70,7 +70,7 @@
     
       
       	
-      	<li class="active"><a href="/archive.html" class="active">Archive</a></li>
+      	<li><a href="/archive.html">Archive</a></li>
       	
       
     
@@ -131,172 +131,75 @@
       <div class="container">
         
 <div class="page-header">
-  <h1>Archive </h1>
+  <h1>tar </h1>
 </div>
 
-<div class="row">
+<div class="row post-full">
   <div class="col-xs-12">
-    
-
-
-
-
-
-  
-    
-    
-    
-    
-  
-    
-      <h2>2015</h2>
-      <h3>January</h3>
+    <div class="date">
+      <span>27 January 2015</span>
+    </div>
+    <div class="content">
       <ul>
-    
-  
-    <li><span>January 29, 2015</span> &raquo; <a href="/2015/01/29/vim">vim</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 29, 2015</span> &raquo; <a href="/2015/01/29/httpError">HTTPError</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 27, 2015</span> &raquo; <a href="/2015/01/27/tar">tar</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 27, 2015</span> &raquo; <a href="/2015/01/27/gcc">gcc</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 26, 2015</span> &raquo; <a href="/2015/01/26/yii_RBAC">yii RBAC</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 25, 2015</span> &raquo; <a href="/2015/01/25/makefile">makefile</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 23, 2015</span> &raquo; <a href="/2015/01/23/svn_status">svn status的各种状态的说明</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 23, 2015</span> &raquo; <a href="/2015/01/23/process_st">进程的状态</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 23, 2015</span> &raquo; <a href="/2015/01/23/extern_cplusplus">C++ extern</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 13, 2015</span> &raquo; <a href="/2015/01/13/first_post">my first post</a></li>
-  
-    
-      </ul>
-    
-  
+<li><code>tar -czvf test.tar.gz test</code>  将test文件夹打包压缩</li>
+<li><code>tar zxvf test.tar.gz</code>        解压</li>
+<li><code>tar -tf test.tar.gz</code>         查看包里面的文件信息</li>
+<li><code>tar -cf test.tar *.jpg</code>      将当前目录所有.jpg文件打包成一个test.tar文件</li>
+<li><code>tar -rf test.tar *.gif</code>      将所有.gif文件增加到test.tar的包里面</li>
+<li><code>tar -uf test.tar logo.gif</code>   更新原来tar包test.tar中logo.gif文件</li>
+<li><code>tar -xf test.tar</code>            解出test.tar包中所有文件</li>
+<li><code>tar -cjf test.tar.bz2 *.jpg</code> 压缩成.bz2的压缩文件</li>
+<li><code>tar -xjf test.tar.bz2</code>       解压.bz2文件</li>
+<li><code>tar -cZf test.tar.Z *.jpg</code>   压缩成.Z的压缩文件</li>
+<li><code>tar -xZf all.tar.Z</code>          解压.Z文件</li>
+</ul>
 
 
+<h3>tar 主要模式</h3>
+
+<ul>
+<li><code>-A --catenate</code>   追加tar文件至归档</li>
+<li><code>-c --create</code>     创建一个新归档</li>
+<li><code>-d --diff</code>       找出归档文件和文件系统的差异</li>
+<li><code>-r --append</code>     追加文件到 归档结尾</li>
+<li><code>-t --list</code>       列出归档内容</li>
+<li><code>-u --update</code>     仅追加比归档中副本更新的文件</li>
+<li><code>-x --extract</code>    从归档中解出文件</li>
+<li><code>-f --file</code>       指定归档文件</li>
+</ul>
+
+
+    </div>
+
+    
+
+    
+  
+    <hr>
+    <ul class="pagination">
+    
+      <li class="prev"><a href="/2015/01/27/gcc" title="gcc">&laquo; Previous</a></li>
+    
+      <li><a href="/archive.html">Archive</a></li>
+    
+      <li class="next"><a href="/2015/01/29/httpError" title="HTTPError">Next &raquo;</a></li>
+    
+    </ul>
+    <hr>
+     <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yutengwan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
   </div>
 </div>
 

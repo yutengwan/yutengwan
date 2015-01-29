@@ -5,10 +5,128 @@
         <description>Brady 丶 一点一滴 - yutengwan</description>
         <link>http://yutengwan.github.io</link>
         <link>http://yutengwan.github.io</link>
-        <lastBuildDate>2015-01-27T19:21:37+08:00</lastBuildDate>
-        <pubDate>2015-01-27T19:21:37+08:00</pubDate>
+        <lastBuildDate>2015-01-29T19:43:01+08:00</lastBuildDate>
+        <pubDate>2015-01-29T19:43:01+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>vim</title>
+                <description>&lt;h3&gt;基本命令&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;dd&lt;/code&gt; 删除一行&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;fa&lt;/code&gt; 光标挪到下一个字母a的位置&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;dfa&lt;/code&gt; 删除从当前光标到下一个字母a之间的所有内容&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;0&lt;/code&gt; 数字零，到行头&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;^&lt;/code&gt; 到本行第一个不是blank字符的位置(blank字符就是空格，tab，换行，回车等)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;$&lt;/code&gt;到本行末尾&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;g_&lt;/code&gt;到本行最后一个不是blank字符的位置&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;/pattern&lt;/code&gt; 搜索pattern的字符串&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;u&lt;/code&gt; 回退&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;&amp;lt;C -r&amp;gt;&lt;/code&gt; 前进&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;e &amp;lt;path&amp;gt;&lt;/code&gt; 打开一个文件&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;.&lt;/code&gt; 重复上个命令&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;N &amp;lt;command&amp;gt;&lt;/code&gt; 重复某个命令N次&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;ndd&lt;/code&gt; 删除n行&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;w&lt;/code&gt; 到下一个单词开头&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;e&lt;/code&gt; 到下一个单词结尾&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;*,#&lt;/code&gt;匹配光标当前所在的单词(&lt;code&gt;*&lt;/code&gt;下一个，&lt;code&gt;#&lt;/code&gt;上一个)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;t,&lt;/code&gt;到&lt;code&gt;,&lt;/code&gt;前的第一个字符，&lt;code&gt;,&lt;/code&gt;可以换成其他的字符&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;a&lt;/code&gt; 在当前光标位置插入&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;o&lt;/code&gt; 在下一行开始插入&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;O&lt;/code&gt; 在光标的上一行插入&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;cw&lt;/code&gt; 替换当前光标的word，并插入&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;:e&lt;/code&gt; 打开文件&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;:saveas &amp;lt;path/to/file&amp;gt;&lt;/code&gt; 另存为&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;参照：&lt;a href=&quot;http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/&quot;&gt;http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/&lt;/a&gt;&lt;/p&gt;
+</description>
+                <link>http://yutengwan.github.io/2015/01/29/vim</link>
+                <guid>http://yutengwan.github.io/2015/01/29/vim</guid>
+                <pubDate>2015-01-29T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>HTTPError</title>
+                <description>&lt;h3&gt;HTTPClientError&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;400&lt;/code&gt;  HTTPBadRequest&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;401&lt;/code&gt;  HTTPUnauthorized&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;402&lt;/code&gt;  HTTPPaymentRequired&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;403&lt;/code&gt;  HTTPForbidden&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;404&lt;/code&gt; HTTPNotFound&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;405&lt;/code&gt; HTTPMethodNotAllowed&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;406&lt;/code&gt; HTTPNotAcceptable&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;407&lt;/code&gt; HTTPProxyAuthenticationRequired&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;408&lt;/code&gt; HTTPRequestTimeout&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;409&lt;/code&gt; HTTPConfict&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;410&lt;/code&gt; HTTPGone&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;411&lt;/code&gt; HTTPLengthRequired&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;412&lt;/code&gt; HTTPProconditionFailed&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;413&lt;/code&gt; HTTPRequestEntityToolLarge&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;414&lt;/code&gt; HTTPRequestURITooLong&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;415&lt;/code&gt; HTTPUnsupportedediaType&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;416&lt;/code&gt; HTTPRequestRangeNotSatisfiable&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;417&lt;/code&gt; HTTPExceptionFailed&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;HTTPServerError&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;500&lt;/code&gt; HTTPInternalServerError&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;501&lt;/code&gt; HTTPNotImplemented&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;502&lt;/code&gt; HTTPBadGateway&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;503&lt;/code&gt; HTTPServiceUnavailable&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;504&lt;/code&gt; HTTPGatewayTimeout&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;505&lt;/code&gt; HTTPVersionNotSupported&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+                <link>http://yutengwan.github.io/2015/01/29/httpError</link>
+                <guid>http://yutengwan.github.io/2015/01/29/httpError</guid>
+                <pubDate>2015-01-29T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>tar</title>
+                <description>&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;tar -czvf test.tar.gz test&lt;/code&gt;  将test文件夹打包压缩&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar zxvf test.tar.gz&lt;/code&gt;        解压&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -tf test.tar.gz&lt;/code&gt;         查看包里面的文件信息&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -cf test.tar *.jpg&lt;/code&gt;      将当前目录所有.jpg文件打包成一个test.tar文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -rf test.tar *.gif&lt;/code&gt;      将所有.gif文件增加到test.tar的包里面&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -uf test.tar logo.gif&lt;/code&gt;   更新原来tar包test.tar中logo.gif文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -xf test.tar&lt;/code&gt;            解出test.tar包中所有文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -cjf test.tar.bz2 *.jpg&lt;/code&gt; 压缩成.bz2的压缩文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -xjf test.tar.bz2&lt;/code&gt;       解压.bz2文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -cZf test.tar.Z *.jpg&lt;/code&gt;   压缩成.Z的压缩文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -xZf all.tar.Z&lt;/code&gt;          解压.Z文件&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;tar 主要模式&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-A --catenate&lt;/code&gt;   追加tar文件至归档&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-c --create&lt;/code&gt;     创建一个新归档&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-d --diff&lt;/code&gt;       找出归档文件和文件系统的差异&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-r --append&lt;/code&gt;     追加文件到 归档结尾&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-t --list&lt;/code&gt;       列出归档内容&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-u --update&lt;/code&gt;     仅追加比归档中副本更新的文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-x --extract&lt;/code&gt;    从归档中解出文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-f --file&lt;/code&gt;       指定归档文件&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+                <link>http://yutengwan.github.io/2015/01/27/tar</link>
+                <guid>http://yutengwan.github.io/2015/01/27/tar</guid>
+                <pubDate>2015-01-27T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>gcc</title>
@@ -22,16 +140,19 @@
 
 &lt;p&gt;&lt;code&gt;-g&lt;/code&gt; 生成的目标文件中带调试信息，调试信息可以在程序异常中止产生core后，帮助分析错误产生的源头，包括产生错误的文件名和行号等非常多有用的信息。&lt;/p&gt;
 
-&lt;p&gt;c编程相关文件后缀：&lt;/p&gt;
+&lt;p&gt;c/c++编程相关文件后缀：&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;.a&lt;/code&gt;静态库(archive)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;.i&lt;/code&gt;源代码(不需要编译预处理)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;.o&lt;/code&gt;对象文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.o&lt;/code&gt;对象文件  &lt;code&gt;gcc -c main.c -o main.o&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;.s&lt;/code&gt;汇编语言代码&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;.so&lt;/code&gt;动态库&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.so&lt;/code&gt;动态库   &lt;code&gt;gcc -Wall -shared *.o -o main.so&lt;/code&gt;  &lt;code&gt;gcc -Wall -fpic -shared *.c -o main.so&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.cpp,.cc,.ii&lt;/code&gt; C++文件&lt;/li&gt;
 &lt;/ul&gt;
 
+
+&lt;p&gt;使用动态库 &lt;code&gt;gcc -Wall useMain.c main.so -o useMain&lt;/code&gt;&lt;/p&gt;
 </description>
                 <link>http://yutengwan.github.io/2015/01/27/gcc</link>
                 <guid>http://yutengwan.github.io/2015/01/27/gcc</guid>

@@ -150,16 +150,19 @@
 
 <p><code>-g</code> 生成的目标文件中带调试信息，调试信息可以在程序异常中止产生core后，帮助分析错误产生的源头，包括产生错误的文件名和行号等非常多有用的信息。</p>
 
-<p>c编程相关文件后缀：</p>
+<p>c/c++编程相关文件后缀：</p>
 
 <ul>
 <li><code>.a</code>静态库(archive)</li>
 <li><code>.i</code>源代码(不需要编译预处理)</li>
-<li><code>.o</code>对象文件</li>
+<li><code>.o</code>对象文件  <code>gcc -c main.c -o main.o</code></li>
 <li><code>.s</code>汇编语言代码</li>
-<li><code>.so</code>动态库</li>
+<li><code>.so</code>动态库   <code>gcc -Wall -shared *.o -o main.so</code>  <code>gcc -Wall -fpic -shared *.c -o main.so</code></li>
+<li><code>.cpp,.cc,.ii</code> C++文件</li>
 </ul>
 
+
+<p>使用动态库 <code>gcc -Wall useMain.c main.so -o useMain</code></p>
 
     </div>
 
@@ -174,7 +177,7 @@
     
       <li><a href="/archive.html">Archive</a></li>
     
-      <li class="next disabled"><a>Next &rarr;</a>
+      <li class="next"><a href="/2015/01/27/tar" title="tar">Next &raquo;</a></li>
     
     </ul>
     <hr>
