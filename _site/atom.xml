@@ -4,13 +4,108 @@
  <title>Brady 丶 一点一滴</title>
  <link href="http://yutengwan.github.io/" rel="self"/>
  <link href="http://yutengwan.github.io"/>
- <updated>2015-01-29T19:43:01+08:00</updated>
+ <updated>2015-03-09T14:22:57+08:00</updated>
  <id>http://yutengwan.github.io</id>
  <author>
    <name>yutengwan</name>
    <email>yutengwan@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>getUserIp</title>
+   <link href="http://yutengwan.github.io/2015/03/02/getUserIp"/>
+   <updated>2015-03-02T00:00:00+08:00</updated>
+   <id>http://yutengwan.github.io/2015/03/02/getUserIp</id>
+   <content type="html">&lt;pre&gt;&lt;code class=&quot;php&quot;&gt;public function getUserIp() {
+    if (!empty($_SERVER[&#39;HTTP_CLIENT_IP&#39;])) {
+        $ip = $_SERVER[&#39;HTTP_CLIENT_IP&#39;];
+    } else if (!empty($_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;])) {
+        $ip = $_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;];
+    } else {
+        $ip = $_SERVER[&#39;REMOTE_ADDR&#39;];  
+    }
+    return $ip;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>const和指针</title>
+   <link href="http://yutengwan.github.io/2015/02/03/const"/>
+   <updated>2015-02-03T00:00:00+08:00</updated>
+   <id>http://yutengwan.github.io/2015/02/03/const</id>
+   <content type="html">&lt;p&gt;const与指针结合起来常用的情况：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;const int *a;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;int const *a;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;这两种写法是一样的，a是一个指向const int型的指针，a所指向的内存单元不可写，所有&lt;code&gt;(*a)++&lt;/code&gt;是不允许的，但是&lt;code&gt;a&lt;/code&gt;可以改写，故&lt;code&gt;a++&lt;/code&gt;是允许的&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;int * const a;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;a是一个指向int型的const指针，&lt;code&gt;*a&lt;/code&gt;是可以改写的，但&lt;code&gt;a&lt;/code&gt;不允许改写&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;int const * const a;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;a是一个指向&lt;code&gt;const int&lt;/code&gt;型的&lt;code&gt;const&lt;/code&gt;指针，因此&lt;code&gt;*a&lt;/code&gt;和&lt;code&gt;a&lt;/code&gt;都不允许改写&lt;/p&gt;
+
+&lt;p&gt;指向非const变量的指针或者非const变量的地址可以传递给指向const变量的指针，编译器可以做隐式类型的转换&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;c&quot;&gt;char c = &#39;a&#39;;
+const char *pc = &amp;amp;c;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是，指向const变量的指针或者const变量的地址不可以传给指向非const变量的指针，以免透过后者意外改写前者所指向的内存单元&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;c&quot;&gt;const char c = &#39;a&#39;;
+char *pc = &amp;amp;c;               //会产生警报
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C/C++ NULL</title>
+   <link href="http://yutengwan.github.io/2015/02/01/NULL"/>
+   <updated>2015-02-01T00:00:00+08:00</updated>
+   <id>http://yutengwan.github.io/2015/02/01/NULL</id>
+   <content type="html">&lt;p&gt;NULL 在C语言中定义为：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;#define NULL ((void *)0)&lt;/code&gt; 把地址0转换成指针类型，称为空指针&lt;/p&gt;
+
+&lt;p&gt;它的特殊之处在于，操作系统不会把任何数据保存在地址0及其附近，也不会把地址0~0xfff的页面映射到物理内存，所有对地址0的访问都会立刻导致段错误&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;*p=0&lt;/code&gt;会导致段错误，就像放在眼前的炸弹一样很容易找到，相比之下，野指针的错误就像埋下地雷一样，更难发现和排除，这次走没事，下次走就有事&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;void *&lt;/code&gt;指针与其他类型的指针之间可以隐式的转换，而不必用类型转换运算符。注意，只能定义&lt;code&gt;void *&lt;/code&gt;指针，而不能定义void型的变量，因为&lt;code&gt;void *&lt;/code&gt;型指针和别的指针一样都占4个字节，而如果定义void型的变量，编译器不知道该分配几个字节给变量。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;void *&lt;/code&gt;指针不能直接Dereference(指针所指的值)，而必须先转换成别的类型的指针在做Dereference。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;C&quot;&gt;void func(void *pv)
+{
+    /*  *pv =&#39;A&#39; is illegal */
+    char *pchar = pv;
+    *pchar = &#39;A&#39;;
+}
+
+int main(void)
+{
+    char c;
+    func(&amp;amp;c);      //传递的只能是指针
+}
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+ </entry>
  
  <entry>
    <title>vim</title>
@@ -465,7 +560,7 @@ include foo.make *.mk $(bar)
  </entry>
  
  <entry>
-   <title>进程的状态</title>
+   <title>process status</title>
    <link href="http://yutengwan.github.io/2015/01/23/process_st"/>
    <updated>2015-01-23T00:00:00+08:00</updated>
    <id>http://yutengwan.github.io/2015/01/23/process_st</id>
@@ -539,7 +634,7 @@ include foo.make *.mk $(bar)
 &lt;li&gt;&lt;p&gt;W：进入内存交换&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;X：杀死的进程&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Z：僵死进程不存在但暂时无法消除&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;S：进程的领导者(在它之下有子进程)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;s：进程的领导者(在它之下有子进程)&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;l：多进程的(CLONE_THREAD,类似NPTL pthreads)&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;+：位于后台的进程组&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;

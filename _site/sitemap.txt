@@ -8,6 +8,9 @@ http://yutengwan.github.io/rss.xml
 http://yutengwan.github.io/sitemap.txt
 http://yutengwan.github.io/tags.html
 
+http://yutengwan.github.io/2015/03/02/getUserIp
+http://yutengwan.github.io/2015/02/03/const
+http://yutengwan.github.io/2015/02/01/NULL
 http://yutengwan.github.io/2015/01/29/vim
 http://yutengwan.github.io/2015/01/29/httpError
 http://yutengwan.github.io/2015/01/27/tar

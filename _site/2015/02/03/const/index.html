@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Archive</title>
+    <title>const和指针</title>
     
     <meta name="author" content="yutengwan">
 
@@ -70,7 +70,7 @@
     
       
       	
-      	<li class="active"><a href="/archive.html" class="active">Archive</a></li>
+      	<li><a href="/archive.html">Archive</a></li>
       	
       
     
@@ -131,225 +131,82 @@
       <div class="container">
         
 <div class="page-header">
-  <h1>Archive </h1>
+  <h1>const和指针 </h1>
 </div>
 
-<div class="row">
+<div class="row post-full">
   <div class="col-xs-12">
-    
+    <div class="date">
+      <span>03 February 2015</span>
+    </div>
+    <div class="content">
+      <p>const与指针结合起来常用的情况：</p>
+
+<ol>
+<li><code>const int *a;</code></li>
+<li><code>int const *a;</code></li>
+</ol>
 
 
+<p>这两种写法是一样的，a是一个指向const int型的指针，a所指向的内存单元不可写，所有<code>(*a)++</code>是不允许的，但是<code>a</code>可以改写，故<code>a++</code>是允许的</p>
+
+<ol>
+<li><code>int * const a;</code></li>
+</ol>
 
 
+<p>a是一个指向int型的const指针，<code>*a</code>是可以改写的，但<code>a</code>不允许改写</p>
 
-  
-    
-    
-    
-    
-  
-    
-      <h2>2015</h2>
-      <h3>March</h3>
-      <ul>
-    
-  
-    <li><span>March  2, 2015</span> &raquo; <a href="/2015/03/02/getUserIp">getUserIp</a></li>
-  
-    
-          
-        
-          </ul>
-          <h3>February</h3>
-          <ul>
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>February  3, 2015</span> &raquo; <a href="/2015/02/03/const">const和指针</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>February  1, 2015</span> &raquo; <a href="/2015/02/01/NULL">C/C++ NULL</a></li>
-  
-    
-          
-        
-          </ul>
-          <h3>January</h3>
-          <ul>
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 29, 2015</span> &raquo; <a href="/2015/01/29/vim">vim</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 29, 2015</span> &raquo; <a href="/2015/01/29/httpError">HTTPError</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 27, 2015</span> &raquo; <a href="/2015/01/27/tar">tar</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 27, 2015</span> &raquo; <a href="/2015/01/27/gcc">gcc</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 26, 2015</span> &raquo; <a href="/2015/01/26/yii_RBAC">yii RBAC</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 25, 2015</span> &raquo; <a href="/2015/01/25/makefile">makefile</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 23, 2015</span> &raquo; <a href="/2015/01/23/svn_status">svn status的各种状态的说明</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 23, 2015</span> &raquo; <a href="/2015/01/23/process_st">process status</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 23, 2015</span> &raquo; <a href="/2015/01/23/extern_cplusplus">C++ extern</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>January 13, 2015</span> &raquo; <a href="/2015/01/13/first_post">my first post</a></li>
-  
-    
-      </ul>
-    
-  
+<ol>
+<li><code>int const * const a;</code></li>
+</ol>
 
 
+<p>a是一个指向<code>const int</code>型的<code>const</code>指针，因此<code>*a</code>和<code>a</code>都不允许改写</p>
+
+<p>指向非const变量的指针或者非const变量的地址可以传递给指向const变量的指针，编译器可以做隐式类型的转换</p>
+
+<pre><code class="c">char c = 'a';
+const char *pc = &amp;c;
+</code></pre>
+
+<p>但是，指向const变量的指针或者const变量的地址不可以传给指向非const变量的指针，以免透过后者意外改写前者所指向的内存单元</p>
+
+<pre><code class="c">const char c = 'a';
+char *pc = &amp;c;               //会产生警报
+</code></pre>
+
+    </div>
+
+    
+
+    
+  
+    <hr>
+    <ul class="pagination">
+    
+      <li class="prev"><a href="/2015/02/01/NULL" title="C/C++ NULL">&laquo; Previous</a></li>
+    
+      <li><a href="/archive.html">Archive</a></li>
+    
+      <li class="next"><a href="/2015/03/02/getUserIp" title="getUserIp">Next &raquo;</a></li>
+    
+    </ul>
+    <hr>
+     <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yutengwan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
   </div>
 </div>
 

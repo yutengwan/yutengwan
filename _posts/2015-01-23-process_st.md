@@ -1,6 +1,6 @@
 ---
 layout : post
-title : 进程的状态
+title : process status
 ---
 
 ## Linux 下的进程状态：
@@ -75,7 +75,7 @@ PS的用法：ps  -  parameter
 
  - Z：僵死进程不存在但暂时无法消除
 
- - S：进程的领导者(在它之下有子进程)
+ - s：进程的领导者(在它之下有子进程)
 
  - l：多进程的(CLONE_THREAD,类似NPTL pthreads)
 
