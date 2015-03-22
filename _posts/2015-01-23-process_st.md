@@ -94,4 +94,50 @@ PS的用法：ps  -  parameter
 
 SIGKILL和SIGSTOP信号不能被，封锁或者忽略，但是，其他信号可以
 
+####bash下Ctr-C，Ctr-D，Ctr-Z的区别
+
+`Ctr-C` To terminate 终止进程，发送SIGINT信号
+`Ctr-D` signals EOF 文件结束符发送SIGTSTP信号
+`Ctr-Z` suppends a program 暂停一个进程
+
+测试程序
+
+```
+<?php 
+while(true) {
+	echo "Hello\n";
+	sleep(1);
+}
+?>
+```
+
+`Ctr-D`没有效果
+
+`Ctr-Z`显示如下：
+
+```
+[1]+  Stopped  /home/work/lamp/php5/bin/php while.php
+
+```
+
+此时这个进程只是被暂停掉了，并没有kill掉
+
+而使用`Ctr-C`这个进程就是被kill掉了
+
+对于`Ctr-D`的作用不是发送信号，而是表示一个特殊的二进制值，表示EOF
+
+```
+
+
+```
+
+对于暂停了的进程如何恢复执行：
+
+`jobs`命令把暂停的进程显示出来
+
+fg %jobnumber 将后台的任务拿到前台来处理
+
+bg %jobnumber 将任务放到后台去处理
+
+kill 管理后台的任务
 
