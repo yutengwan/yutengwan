@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>C/C++ NULL</title>
+    <title>C/C++ NULL和void *</title>
     
     <meta name="author" content="yutengwan">
 
@@ -131,7 +131,7 @@
       <div class="container">
         
 <div class="page-header">
-  <h1>C/C++ NULL </h1>
+  <h1>C/C++ NULL和void * </h1>
 </div>
 
 <div class="row post-full">
@@ -165,6 +165,76 @@ int main(void)
     func(&amp;c);      //传递的只能是指针
 }
 </code></pre>
+
+<h3>void指针使用规范</h3>
+
+<ul>
+<li>void指针可以指向任意类型的数据，亦可用任意数据类型指针对void指针赋值，例如</li>
+</ul>
+
+
+<pre><code>int *print;
+void *pvoid;
+pvoid = print;
+print = (int *)pvoid;    //在将pvoid赋给其他类型的指针时需要强制类型转换
+</code></pre>
+
+<ul>
+<li><p>void 函数参数和函数返回进行限定</p>
+
+<ul>
+<li>当函数不需要返回值时，必须使用void，void func(int,int);</li>
+<li>当函数不接受参数时，必须使用void，int func(void);</li>
+<li><code>void*</code>可以指向任意类型的数据，因此可以用<code>void*</code>作为函数形参，这样的函数可以接受任意类型数据的指针作为参数：void *memcpy(void *dest,const void *src,size_t len);</li>
+</ul>
+</li>
+<li><p>当要访问void指针的值时，需要将其强制转为其他类型才能访问，因为它表示的内存地址，不能直接访问</p></li>
+</ul>
+
+
+<h4>函数指针</h4>
+
+<blockquote><p>对于一个函数而言，函数名也是指向函数第一条指令的常量指针。而编译器要做的就是在程序编译之后，为每个函数分配一个首地址，即该函数第一条指令的地址。一般情况下，我们可以用一个指针来保存这个地址，而这个指针就是函数指针，该指针可以看作是它指向函数的别名，所以我们可以用该指针来调用这个函数。</p></blockquote>
+
+<p><code>type (*func)(type &amp;, type &amp;)</code> 此语句声明一个指针func，它指向一个函数，函数带两个type型参数并返回一个type值</p>
+
+<ul>
+<li>一个指向函数的指针必须确保被定义且分配了内存，否则它将指向一个空地址</li>
+<li>特别注意第一个括号位置，如果我们不写括号: <code>type *func(type,type)</code>,这就不是一个指向函数的指针了，而是声明了一个函数，该函数返回一个type类型的指针</li>
+</ul>
+
+
+<p>例子：</p>
+
+<pre><code class="c">
+int max(int a,int b) 
+{
+    return a&gt;b?a:b;
+}
+int min(int a,int b)
+{
+    return a&lt;b?a:b;
+}
+int (*func)(int,int);    //声明函数指针，指向返回类型为int
+int main()
+{
+    func = max;
+    int c = (*func)(1,2);
+    func = min;
+    c = (*func)(1,2);
+}
+</code></pre>
+
+<p>说明：func是一个函数指针，那么func就是指向该指针所指向的函数地址，所有<code>(*func)(int,int)</code>就是调用该函数的方式，ANSI C标准允许程序员将上式简写为func()，但是一定要记住这种写法只是一种简写形式</p>
+
+<p>在表达式(<em>func)()中，</em>func两侧的括号很重要的</p>
+
+<ul>
+<li>func 是一个函数指针</li>
+<li>func()是(*func)()的简写形式</li>
+<li>&amp;func是&amp;(*func)的简写形式</li>
+</ul>
+
 
     </div>
 

@@ -5,10 +5,154 @@
         <description>Brady 丶 一点一滴 - yutengwan</description>
         <link>http://yutengwan.github.io</link>
         <link>http://yutengwan.github.io</link>
-        <lastBuildDate>2015-03-20T13:50:46+08:00</lastBuildDate>
-        <pubDate>2015-03-20T13:50:46+08:00</pubDate>
+        <lastBuildDate>2015-07-08T13:54:01+08:00</lastBuildDate>
+        <pubDate>2015-07-08T13:54:01+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>wget</title>
+                <description>&lt;h3&gt;wget&lt;/h3&gt;
+
+&lt;p&gt;在使用wget时，使用-r 可能会递归的深度受到限制&lt;/p&gt;
+
+&lt;p&gt;默认的depth是5层，所以需要修改才能保证完全下载下来&lt;/p&gt;
+
+&lt;p&gt;-l 设置深度&lt;/p&gt;
+
+&lt;p&gt;wget -nH -m &lt;a href=&quot;ftp://hostname/folder&quot;&gt;ftp://hostname/folder&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;-nH 不创建以主机名命名的目录&lt;/li&gt;
+&lt;li&gt;–cut-dirs：希望去掉原来的目录层数，从根目录开始计算。如果想完全保留FTP原有的目录结构，则不要加该参数。&lt;/li&gt;
+&lt;li&gt;-m：下载所有子目录并且保留目录结构。&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+                <link>http://yutengwan.github.io/2015/04/09/wget</link>
+                <guid>http://yutengwan.github.io/2015/04/09/wget</guid>
+                <pubDate>2015-04-09T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>css,table</title>
+                <description>&lt;h3&gt;table&lt;/h3&gt;
+
+&lt;p&gt;表格标题：&lt;code&gt;caption&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;表头：&lt;code&gt;thead&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;主体部分：&lt;code&gt;tbody&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;尾部：&lt;code&gt;tfoot&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;表头：&lt;code&gt;th&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;单元格：&lt;code&gt;td&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+ &amp;lt;table&amp;gt;
+    &amp;lt;caption&amp;gt;几种页面实现的比较&amp;lt;/caption&amp;gt;
+        &amp;lt;thead&amp;gt;
+            &amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;实现方法&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;代码量&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;搜索引擎友好&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;
+        &amp;lt;/thead&amp;gt;
+    &amp;lt;tbody&amp;gt;
+        &amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;table布局&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;多&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;差&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+    &amp;lt;/tbody&amp;gt;
+ &amp;lt;/table&amp;gt;
+
+bootstrap table 中有如下css
+
+.success、.error、.warning、.info
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+                <link>http://yutengwan.github.io/2015/04/01/css</link>
+                <guid>http://yutengwan.github.io/2015/04/01/css</guid>
+                <pubDate>2015-04-01T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>c语言基本算法</title>
+                <description>&lt;h4&gt;字符串转为数字&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;int parse_number(char *num) {
+    double n=0,sign=1,scale=0;
+    int subscale=0,signsubscale=1;
+    if (*num == &#39;-&#39;) {                        //负数
+        sign = -1,num++;
+    }
+    if (*num == &#39;0&#39;) {                        //0开头
+        num++;
+    }
+    if (*num&amp;gt;=&#39;1&#39; &amp;amp;&amp;amp; *num&amp;lt;=9) {
+        do {
+            n = (n*10.0)+(*num-&#39;0&#39;);
+            num++;
+        } while(*num&amp;gt;=&#39;0&#39; &amp;amp;&amp;amp; *num&amp;lt;=&#39;9&#39;);
+    }
+    if (*num==&#39;.&#39; &amp;amp;&amp;amp; num[1]&amp;gt;=0 &amp;amp;&amp;amp; num[1]&amp;lt;=9) {           //小数点后面的值
+        num++;
+        do {
+            n = (n*10.0)+(*num-&#39;0&#39;);
+            scale--;
+        } while(*num&amp;gt;=0 &amp;amp;&amp;amp; *num&amp;lt;=&#39;9&#39;);
+    }
+    if (*num==&#39;e&#39; || *num==&#39;E&#39;) {                        //如果是E，科学计数法
+        num++;
+        if (*num==&#39;+&#39;) {
+            num++;
+        } else if (*num==&#39;-&#39;) {
+            signsubscale=-1;
+            num++;
+        }
+        while (*num&amp;gt;=&#39;0&#39; &amp;amp;&amp;amp; *num&amp;lt;=9) {
+            subscale = (subscale*10)+(*num-&#39;0&#39;);
+            num++;
+        }
+    }
+
+    n=sign*n*pow(10.0,(scale+subscale*signsubscale));
+
+    return n;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+                <link>http://yutengwan.github.io/2015/03/26/c_algorithm</link>
+                <guid>http://yutengwan.github.io/2015/03/26/c_algorithm</guid>
+                <pubDate>2015-03-26T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>static</title>
+                <description>&lt;h3&gt;c语言static&lt;/h3&gt;
+
+&lt;h4&gt;static修饰变量&lt;/h4&gt;
+
+&lt;p&gt;static修饰变量都放在静态数据区，使得其作用域仅限于变量被定义的文件中（即从变量定义处到本文件结尾处），其它文件不论通过什么方式都不能访问。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在某个函数体里面定义的静态局部变量，只能在本函数体被访问，即使同一个文件的其它函数也访问不了。&lt;/li&gt;
+&lt;li&gt;静态局部变量总存储在静态数据区，所以即使这个函数运行结束，这个静态局部变量的值不会被销毁，函数下次使用时仍然要用到这个值。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h4&gt;static修饰函数&lt;/h4&gt;
+
+&lt;p&gt;静态函数(内部函数)，用来表示不能被其它文件访问的一个函数（和用static修饰全局变量的目的一样，都是不允许其它文件访问）。这样一来便有一个好处：程序员不用担心自己编写的函数与其他文件的函数同名。&lt;/p&gt;
+
+&lt;h4&gt;特别说明&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;静态局部变量数据属于静态存储类别，在静态存储区内分配内存单元，在整个程序运行期间都不释放。而自动变量（即动态局部变量）属于动态存储类别，占动态存储区空间而不占用静态存储区空间，函数调用结束后立即释放空间。&lt;/li&gt;
+&lt;li&gt;静态局部变量时在编译时被赋值的，即自始至终只赋值一次，在程序运行时它已经有初值。以后每次调用函数时不再重新赋初值而只是保留上次函数调用结束时的值。而自动变量赋初值，不是在编译时进行的，而是在运行时进行，所以每调用一次函数就赋一次初值。&lt;/li&gt;
+&lt;li&gt;如在定义局部变量时不赋初值，则对静态局部变量来说，编译时自动赋一个初值0（对数值型变量）或空字符（对字符变量）。而对自动变量来说，如果不赋初值，则它的值是一个不确定的值。这是由每次动态分配的内存单元不同所决定的。&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+                <link>http://yutengwan.github.io/2015/03/25/static</link>
+                <guid>http://yutengwan.github.io/2015/03/25/static</guid>
+                <pubDate>2015-03-25T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>yii</title>
@@ -23,6 +167,65 @@ $machines = Machine::model()-&amp;gt;with(&#39;blocks&#39;)-&amp;gt;findAll(&#39
 json_decode($machine[&#39;machine_spec&#39;],true)  //将json数据转为数组
 
 json_decode($machine[&#39;machine_spec&#39;]);     //json转为stdObject对象   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;将xml解析成数组&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;public function xmlToArray($xml) {
+    $xml = (array)(simplexml_load_string)($xml);
+    $ret = array();
+    foreach($xmlArray as $key=&amp;gt;$item) {
+        $ret[$ret] = $this-&amp;gt;structToArray($item);
+    }
+    return $ret;
+}
+
+public function structToArray($item) {
+    if(!is_string($item)) {
+        $item = (array)$item;
+        foreach($item as $key=&amp;gt;$value) {
+            $item[$key] = $this-&amp;gt;strcutToArray($value);
+        }
+    }
+    return $item;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;returnUrl&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&quot;php&quot;&gt;
+
+/**
+ * 获取返回 URL
+ * 用于动作执行完毕后的跳转.
+ * @param mixed $defaultUrl 默认跳转
+ * @return string
+ */
+ public function getReturnUrl($defaultUrl = null) {
+    if (isset($_GET[&#39;returnUrl&#39;])) {
+        return $_GET[&#39;returnUrl&#39;];
+    }
+    if (isset($_POST[&#39;returnUrl&#39;])) {
+       return $_POST[&#39;returnUrl&#39;];
+    }
+    if ($this-&amp;gt;_returnUrl !== null) {
+       return $this-&amp;gt;_returnUrl;
+    }
+    if (Yii::app()-&amp;gt;request-&amp;gt;urlReferrer != null) {
+       return Yii::app()-&amp;gt;request-&amp;gt;urlReferrer;
+    }
+    if ($defaultUrl != null) {
+        return CHtml::normalizeUrl($defaultUrl);
+    }
+    return Yii::app()-&amp;gt;getBaseUrl();
+}
+
+解释：
+就是如果找不到回头路，就默认走一条之前指定的路。
+如果在参数里有returnUrl 就返回returnUrl 
+如果没有，就找从哪个网页来的，就是referer 
+如果还找不到，就看默认值
+默认值没有，就返回网站根目录。
 &lt;/code&gt;&lt;/pre&gt;
 </description>
                 <link>http://yutengwan.github.io/2015/03/15/yii</link>
@@ -161,7 +364,7 @@ char *pc = &amp;amp;c;               //会产生警报
         </item>
 
         <item>
-                <title>C/C++ NULL</title>
+                <title>C/C++ NULL和void *</title>
                 <description>&lt;p&gt;NULL 在C语言中定义为：&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;#define NULL ((void *)0)&lt;/code&gt; 把地址0转换成指针类型，称为空指针&lt;/p&gt;
@@ -187,6 +390,76 @@ int main(void)
     func(&amp;amp;c);      //传递的只能是指针
 }
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;void指针使用规范&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;void指针可以指向任意类型的数据，亦可用任意数据类型指针对void指针赋值，例如&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;pre&gt;&lt;code&gt;int *print;
+void *pvoid;
+pvoid = print;
+print = (int *)pvoid;    //在将pvoid赋给其他类型的指针时需要强制类型转换
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;void 函数参数和函数返回进行限定&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;当函数不需要返回值时，必须使用void，void func(int,int);&lt;/li&gt;
+&lt;li&gt;当函数不接受参数时，必须使用void，int func(void);&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void*&lt;/code&gt;可以指向任意类型的数据，因此可以用&lt;code&gt;void*&lt;/code&gt;作为函数形参，这样的函数可以接受任意类型数据的指针作为参数：void *memcpy(void *dest,const void *src,size_t len);&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;当要访问void指针的值时，需要将其强制转为其他类型才能访问，因为它表示的内存地址，不能直接访问&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h4&gt;函数指针&lt;/h4&gt;
+
+&lt;blockquote&gt;&lt;p&gt;对于一个函数而言，函数名也是指向函数第一条指令的常量指针。而编译器要做的就是在程序编译之后，为每个函数分配一个首地址，即该函数第一条指令的地址。一般情况下，我们可以用一个指针来保存这个地址，而这个指针就是函数指针，该指针可以看作是它指向函数的别名，所以我们可以用该指针来调用这个函数。&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;type (*func)(type &amp;amp;, type &amp;amp;)&lt;/code&gt; 此语句声明一个指针func，它指向一个函数，函数带两个type型参数并返回一个type值&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一个指向函数的指针必须确保被定义且分配了内存，否则它将指向一个空地址&lt;/li&gt;
+&lt;li&gt;特别注意第一个括号位置，如果我们不写括号: &lt;code&gt;type *func(type,type)&lt;/code&gt;,这就不是一个指向函数的指针了，而是声明了一个函数，该函数返回一个type类型的指针&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;c&quot;&gt;
+int max(int a,int b) 
+{
+    return a&amp;gt;b?a:b;
+}
+int min(int a,int b)
+{
+    return a&amp;lt;b?a:b;
+}
+int (*func)(int,int);    //声明函数指针，指向返回类型为int
+int main()
+{
+    func = max;
+    int c = (*func)(1,2);
+    func = min;
+    c = (*func)(1,2);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：func是一个函数指针，那么func就是指向该指针所指向的函数地址，所有&lt;code&gt;(*func)(int,int)&lt;/code&gt;就是调用该函数的方式，ANSI C标准允许程序员将上式简写为func()，但是一定要记住这种写法只是一种简写形式&lt;/p&gt;
+
+&lt;p&gt;在表达式(&lt;em&gt;func)()中，&lt;/em&gt;func两侧的括号很重要的&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;func 是一个函数指针&lt;/li&gt;
+&lt;li&gt;func()是(*func)()的简写形式&lt;/li&gt;
+&lt;li&gt;&amp;amp;func是&amp;amp;(*func)的简写形式&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
                 <link>http://yutengwan.github.io/2015/02/01/NULL</link>
                 <guid>http://yutengwan.github.io/2015/02/01/NULL</guid>
@@ -276,8 +549,35 @@ int main(void)
         </item>
 
         <item>
-                <title>tar</title>
-                <description>&lt;ul&gt;
+                <title>tar,gzip,zip</title>
+                <description>&lt;p&gt;&lt;code&gt;tar [option] tarfile filename&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3&gt;tar 主要模式&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-A --catenate&lt;/code&gt;   追加tar文件至归档,合并多个tar文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-c --create&lt;/code&gt;     创建一个新归档&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-d --diff&lt;/code&gt;       找出归档文件和文件系统的差异&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-r --append&lt;/code&gt;     追加文件到 归档结尾&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-t --list&lt;/code&gt;       列出归档内容&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-u --update&lt;/code&gt;     仅追加比归档中副本更新的文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-x --extract&lt;/code&gt;    从归档中解出文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-f --file&lt;/code&gt;       指定归档文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-v,--v&lt;/code&gt;          显示进度信息&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-C&lt;/code&gt;              指定文件提取得目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--totals&lt;/code&gt;        归档完成后，打印总归档字节数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--delete&lt;/code&gt;        从归档文件中删除指定的文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--exclude&lt;/code&gt;       归档时，排除指定样式的文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-j&lt;/code&gt;              生成归档文件时，使用bunzip格式进行压缩&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-z&lt;/code&gt;              生成归档文件时，使用gzip格式进行压缩&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--lzma&lt;/code&gt;          生成归档文件时，使用lzma格式进行压缩&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-a&lt;/code&gt;              生成归档文件时，根据扩展名自动进行压缩&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;实例&lt;/h3&gt;
+
+&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;tar -czvf test.tar.gz test&lt;/code&gt;  将test文件夹打包压缩&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;tar zxvf test.tar.gz&lt;/code&gt;        解压&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;tar -tf test.tar.gz&lt;/code&gt;         查看包里面的文件信息&lt;/li&gt;
@@ -289,20 +589,92 @@ int main(void)
 &lt;li&gt;&lt;code&gt;tar -xjf test.tar.bz2&lt;/code&gt;       解压.bz2文件&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;tar -cZf test.tar.Z *.jpg&lt;/code&gt;   压缩成.Z的压缩文件&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;tar -xZf all.tar.Z&lt;/code&gt;          解压.Z文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -xvf all.tar file_one file_two&lt;/code&gt; 提取归档中的指定文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -Af file_one.tar file_two.tar&lt;/code&gt;  合并两个tar文件到file_one.tar&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -f all.tar --delete file_one&lt;/code&gt; 删除指定文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tar -cf all.tar * --exclude &quot;*.log&quot;&lt;/code&gt; 归档时排除日志文件&lt;/li&gt;
 &lt;/ul&gt;
 
 
-&lt;h3&gt;tar 主要模式&lt;/h3&gt;
+&lt;h3&gt;gzip/gunzip 压缩和解压缩文件&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;gzip [option] file&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;gunzip [option] file&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;gzip只能压缩单个文件，如果指定多个文件，则会生成多个单独的压缩文件，gzip会在生成压缩文件后，删除源文件，gunzip会在解压缩完成后，删除源文件&lt;/p&gt;&lt;/blockquote&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-A --catenate&lt;/code&gt;   追加tar文件至归档&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-c --create&lt;/code&gt;     创建一个新归档&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-d --diff&lt;/code&gt;       找出归档文件和文件系统的差异&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-r --append&lt;/code&gt;     追加文件到 归档结尾&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-t --list&lt;/code&gt;       列出归档内容&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-u --update&lt;/code&gt;     仅追加比归档中副本更新的文件&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-x --extract&lt;/code&gt;    从归档中解出文件&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-f --file&lt;/code&gt;       指定归档文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-l,--list&lt;/code&gt; 列出压缩文件的属性信息&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--fast&lt;/code&gt; 指定最低压缩比&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--best&lt;/code&gt; 指定最高压缩比&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-n&lt;/code&gt; 指定压缩比&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt; 显示进度信息&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;bzip2/bunzip2 进行压缩/解压缩&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;bzip2 file&lt;/code&gt;  &lt;code&gt;bunzip2 file&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;bzip2通常能生成比gzip压缩比更高的文件，默认bzip2会删除源文件，-k会保留&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-k&lt;/code&gt; 保留源文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-n&lt;/code&gt; 指定压缩比&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;zip/unzip 进行压缩/解压缩&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;zip [option] file file2 dirs&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;zip压缩/解压缩后，不会删除源文件&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-r&lt;/code&gt; 递归，压缩目录时使用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-l&lt;/code&gt; 列出压缩文件内容&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-d&lt;/code&gt; 从压缩文件中删除指定文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-u&lt;/code&gt; 更新压缩文件的内容&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h4&gt;实例&lt;/h4&gt;
+
+&lt;p&gt;压缩文件&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;zip all.zip file&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;zip all.zip file_one file_two&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;zip -r all.zip dri_name&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;更新压缩文件&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;zip all.zip -u log.txt&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;删除指定的内容&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;zip -d all.zip log.txt&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;解压文件&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;unzip all.zip&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;列出压缩文件的内容&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;unzip -l all.zip&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>

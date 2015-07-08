@@ -8,6 +8,10 @@ http://yutengwan.github.io/rss.xml
 http://yutengwan.github.io/sitemap.txt
 http://yutengwan.github.io/tags.html
 
+http://yutengwan.github.io/2015/04/09/wget
+http://yutengwan.github.io/2015/04/01/css
+http://yutengwan.github.io/2015/03/26/c_algorithm
+http://yutengwan.github.io/2015/03/25/static
 http://yutengwan.github.io/2015/03/15/yii
 http://yutengwan.github.io/2015/03/10/wget
 http://yutengwan.github.io/2015/03/10/awk
