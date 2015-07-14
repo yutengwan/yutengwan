@@ -8,6 +8,7 @@ http://yutengwan.github.io/rss.xml
 http://yutengwan.github.io/sitemap.txt
 http://yutengwan.github.io/tags.html
 
+http://yutengwan.github.io/2015/07/14/vim_tab
 http://yutengwan.github.io/2015/04/09/wget
 http://yutengwan.github.io/2015/04/01/css
 http://yutengwan.github.io/2015/03/26/c_algorithm

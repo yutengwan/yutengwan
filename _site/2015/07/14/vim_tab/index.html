@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>wget</title>
+    <title>vim set expendtab</title>
     
     <meta name="author" content="yutengwan">
 
@@ -131,29 +131,36 @@
       <div class="container">
         
 <div class="page-header">
-  <h1>wget </h1>
+  <h1>vim set expendtab </h1>
 </div>
 
 <div class="row post-full">
   <div class="col-xs-12">
     <div class="date">
-      <span>09 April 2015</span>
+      <span>14 July 2015</span>
     </div>
     <div class="content">
-      <h3>wget</h3>
-
-<p>在使用wget时，使用-r 可能会递归的深度受到限制</p>
-
-<p>默认的depth是5层，所以需要修改才能保证完全下载下来</p>
-
-<p>-l 设置深度</p>
-
-<p>wget -nH -m <a href="ftp://hostname/folder">ftp://hostname/folder</a></p>
+      <p>今天在写程序时,使用到tab，因为在vim设置的时候设置了</p>
 
 <ul>
-<li>-nH 不创建以主机名命名的目录</li>
-<li>–cut-dirs：希望去掉原来的目录层数，从根目录开始计算。如果想完全保留FTP原有的目录结构，则不要加该参数。</li>
-<li>-m：下载所有子目录并且保留目录结构。</li>
+<li>set tabstop=4</li>
+<li>set expandtab</li>
+</ul>
+
+
+<p>这就说明了将tab按钮设置成四个空格，且将它转为空格，不在是tab制表符</p>
+
+<p>可以查看文件的tab格式</p>
+
+<ul>
+<li>:set expandtab?</li>
+</ul>
+
+
+<p>此时需要做的就是将expandtab失效</p>
+
+<ul>
+<li>:set expandtab!</li>
 </ul>
 
 
@@ -166,11 +173,11 @@
     <hr>
     <ul class="pagination">
     
-      <li class="prev"><a href="/2015/04/01/css" title="css,table">&laquo; Previous</a></li>
+      <li class="prev"><a href="/2015/04/09/wget" title="wget">&laquo; Previous</a></li>
     
       <li><a href="/archive.html">Archive</a></li>
     
-      <li class="next"><a href="/2015/07/14/vim_tab" title="vim set expendtab">Next &raquo;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
     
     </ul>
     <hr>

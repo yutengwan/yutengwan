@@ -4,13 +4,44 @@
  <title>Brady 丶 一点一滴</title>
  <link href="http://yutengwan.github.io/" rel="self"/>
  <link href="http://yutengwan.github.io"/>
- <updated>2015-07-08T13:54:01+08:00</updated>
+ <updated>2015-07-14T19:11:49+08:00</updated>
  <id>http://yutengwan.github.io</id>
  <author>
    <name>yutengwan</name>
    <email>yutengwan@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>vim set expendtab</title>
+   <link href="http://yutengwan.github.io/2015/07/14/vim_tab"/>
+   <updated>2015-07-14T00:00:00+08:00</updated>
+   <id>http://yutengwan.github.io/2015/07/14/vim_tab</id>
+   <content type="html">&lt;p&gt;今天在写程序时,使用到tab，因为在vim设置的时候设置了&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;set tabstop=4&lt;/li&gt;
+&lt;li&gt;set expandtab&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;这就说明了将tab按钮设置成四个空格，且将它转为空格，不在是tab制表符&lt;/p&gt;
+
+&lt;p&gt;可以查看文件的tab格式&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;:set expandtab?&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;此时需要做的就是将expandtab失效&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;:set expandtab!&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>wget</title>
@@ -484,6 +515,11 @@ int main()
 &lt;li&gt;&lt;p&gt;&lt;code&gt;$&lt;/code&gt;到本行末尾&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;code&gt;g_&lt;/code&gt;到本行最后一个不是blank字符的位置&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;code&gt;/pattern&lt;/code&gt; 搜索pattern的字符串&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;g/pattern&lt;/code&gt; 搜索pattern的字符串&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;g/pattern/d&lt;/code&gt; 全局删除匹配行&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;1,5g/pattern/d&lt;/code&gt; 删除第1-5行里的匹配行&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;v/pattern/d&lt;/code&gt; 删除不包含指定字符的行&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;g!/pattern/d&lt;/code&gt; 删除不包含指定字符的行&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;code&gt;u&lt;/code&gt; 回退&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;code&gt;&amp;lt;C -r&amp;gt;&lt;/code&gt; 前进&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;code&gt;e &amp;lt;path&amp;gt;&lt;/code&gt; 打开一个文件&lt;/p&gt;&lt;/li&gt;
